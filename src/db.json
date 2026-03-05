@@ -1,0 +1,12 @@
+{
+  "Atelier": [
+    {
+      "id": "28ee",
+      "nom": "chahineatelier",
+      "mailFormateur": "chahinecr@gmail.com",
+      "nbrParticipant": 20,
+      "Statut": true
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

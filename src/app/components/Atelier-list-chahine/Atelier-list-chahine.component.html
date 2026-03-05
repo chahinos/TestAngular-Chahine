@@ -1,0 +1,56 @@
+<div class="list-page">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <span class="page-icon">🏫</span>
+      <div>
+        <h1 class="page-title">Mes Ateliers</h1>
+        <p class="page-sub">{{ Ateliers.length }} atelier{{ Ateliers.length > 1 ? 's' : '' }} enregistré{{ Ateliers.length > 1 ? 's' : '' }}</p>
+      </div>
+    </div>
+    <a routerLink="/add" class="btn-add">
+      <span>＋</span> Nouvel Atelier
+    </a>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state" *ngIf="Ateliers.length === 0">
+    <div class="empty-icon">🏫</div>
+    <h2>Aucun atelier pour l'instant</h2>
+    <p>Commencez par ajouter votre premier atelier.</p>
+    <a routerLink="/add" class="btn-add">＋ Ajouter un atelier</a>
+  </div>
+
+  <!-- Cards grid -->
+  <div class="cards-grid" *ngIf="Ateliers.length > 0">
+    <div class="jardin-card" *ngFor="let a of Ateliers; let i = index" [style.animation-delay]="i * 0.08 + 's'">
+
+      <div class="card-top">
+        <div class="card-emoji">{{ getEmoji(a.Statut) }}</div>
+        <span class="card-statut" [class.actif]="a.Statut" [class.inactif]="!a.Statut">
+          {{ a.Statut ? 'Actif' : 'Inactif' }}
+        </span>
+      </div>
+
+      <div class="card-body">
+        <h3 class="card-adresse">{{ a.nom }}</h3>
+        <div class="card-meta">
+          <span class="meta-item">📧 {{ a.mailFormateur }}</span>
+          <span class="meta-item">👥 {{ a.nbrParticipant }} participants</span>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-edit" [routerLink]="['/edit', a.id]">
+          ✏️ Modifier
+        </button>
+        <button class="btn-delete" (click)="deleteAtelier(a.id)">
+          🗑️
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

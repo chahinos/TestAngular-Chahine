@@ -1,0 +1,81 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4>{{ isEditMode ? 'Modifier Atelier' : 'Ajouter Atelier' }}</h4>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="AtelierForm" (ngSubmit)="onSubmit()">
+
+        <!-- Nom -->
+        <div class="mb-3">
+          <label class="form-label">Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            [class.is-invalid]="nom?.invalid && nom?.touched"
+            formControlName="nom"
+            placeholder="Nom de l'atelier"
+          />
+          <div class="invalid-feedback">
+            <span *ngIf="nom?.errors?.['required']">Le nom est obligatoire.</span>
+            <span *ngIf="nom?.errors?.['minlength']">Minimum 3 caractères.</span>
+          </div>
+        </div>
+
+        <!-- Mail Formateur -->
+        <div class="mb-3">
+          <label class="form-label">Mail Formateur</label>
+          <input
+            type="email"
+            class="form-control"
+            [class.is-invalid]="mailFormateur?.invalid && mailFormateur?.touched"
+            formControlName="mailFormateur"
+            placeholder="email@exemple.com"
+          />
+          <div class="invalid-feedback">
+            <span *ngIf="mailFormateur?.errors?.['required']">Le mail est obligatoire.</span>
+            <span *ngIf="mailFormateur?.errors?.['email']">Format email invalide.</span>
+          </div>
+        </div>
+
+        <!-- Nombre de Participants -->
+        <div class="mb-3">
+          <label class="form-label">Nombre de Participants</label>
+          <input
+            type="number"
+            class="form-control"
+            [class.is-invalid]="nbrParticipant?.invalid && nbrParticipant?.touched"
+            formControlName="nbrParticipant"
+          />
+          <div class="invalid-feedback">
+            <span *ngIf="nbrParticipant?.errors?.['required']">Ce champ est obligatoire.</span>
+            <span *ngIf="nbrParticipant?.errors?.['min']">Doit être supérieur à 0.</span>
+          </div>
+        </div>
+
+        <!-- Statut -->
+        <div class="mb-3 form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="Statut"
+            formControlName="Statut"
+          />
+          <label class="form-check-label" for="Statut">Actif</label>
+        </div>
+
+        <!-- Boutons -->
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary">
+            {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="router.navigate(['/list'])">
+            Annuler
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
